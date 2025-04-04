@@ -51,6 +51,9 @@ def parse_args():
     parser.add_argument(
         "--checkpoint_dir", type=str, default="checkpoints", help="Directory to save the downloaded checkpoints."
     )
+    parser.add_argument(
+        "--hf_read_api_key", type=str, help="Directory to save the downloaded checkpoints."
+    )
     args = parser.parse_args()
     return args
 
@@ -91,6 +94,7 @@ def convert_pixtral_checkpoint(checkpoint_dir: str, checkpoint_name: str, vit_ty
         allow_patterns=["params.json", "consolidated.safetensors"],
         local_dir=pixtral_ckpt_dir,
         local_dir_use_symlinks=False,
+        use_auth_token=args.hf_read_api_key
     )
     orig_dtype = torch.get_default_dtype()
     dtype = torch.bfloat16
@@ -292,7 +296,7 @@ def main(args):
                 local_dir.mkdir(parents=True, exist_ok=True)
                 print(f"Downloading {repo_id} to {local_dir}...")
                 snapshot_download(
-                    repo_id=repo_id, local_dir=str(local_dir), local_dir_use_symlinks=False, **download_kwargs
+                    repo_id=repo_id, local_dir=str(local_dir), local_dir_use_symlinks=False, **download_kwargs, use_auth_token=args.hf_read_api_key
                 )
 
     # Download the always-included models
@@ -311,6 +315,7 @@ def main(args):
                 repo_id=repo_id,
                 local_dir=str(local_dir),
                 local_dir_use_symlinks=False,
+                use_auth_token=args.hf_read_api_key
             )
 
     if "Video2World" in args.model_types:
