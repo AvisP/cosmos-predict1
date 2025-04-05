@@ -42,6 +42,7 @@ def create_vlm_prompt_upsampler(
     If pixtral_ckpt is not provided, use the pretrained checkpoint.
     """
     model_ckpt_path = os.path.join(checkpoint_dir, "model.pt")
+    print("Model Ckpt in video2world_prompt_upsampler_inference ", model_ckpt_path)
     model_config, tokenizer_config = create_vision_language_model_config(
         model_ckpt_path=model_ckpt_path,
         tokenizer_ckpt_path=tokenizer_ckpt_path,
