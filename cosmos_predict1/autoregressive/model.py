@@ -256,7 +256,7 @@ class AutoRegressiveModel(torch.nn.Module):
             if hasattr(model_config, key):
                 # Override the default model configuration with the parameters from the checkpoint
                 setattr(model_config, key, value)
-
+        print(f"loading checkpoint from {ckpt_path}")
         with misc.timer(f"loading checkpoint from {ckpt_path}"):
             if ckpt_path.endswith("safetensors"):
                 # Load with safetensors API
