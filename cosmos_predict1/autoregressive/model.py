@@ -222,7 +222,8 @@ class AutoRegressiveModel(torch.nn.Module):
         config_params = {}
 
         # Load checkpoint and model parameters
-
+        
+        print("Model config ckpt path ", model_config.ckpt_path)
         if model_config.ckpt_path is None:
             # If ckpt_path is not provided, we assume the model checkpoint is saved in the ckpt_dir
             ckpt_dir = model_config.ckpt_dir
