@@ -257,7 +257,7 @@ class AutoRegressiveModel(torch.nn.Module):
             if hasattr(model_config, key):
                 # Override the default model configuration with the parameters from the checkpoint
                 setattr(model_config, key, value)
-        print(f"loading checkpoint from {ckpt_path}")
+                
         with misc.timer(f"loading checkpoint from {ckpt_path}"):
             if ckpt_path.endswith("safetensors"):
                 # Load with safetensors API
@@ -271,9 +271,6 @@ class AutoRegressiveModel(torch.nn.Module):
                     weights_only=True,
                 )
         llm_checkpoint = checkpoint["model"] if "model" in checkpoint else checkpoint
-
-        print("Check point ", type(checkpoint))
-        print("LLM check point ", checkpoint["vision_encoder"])
         
         if model_config.vision_encoder is not None:
             # Take the LLM weights (starting with "model.") from the VLM checkpoint
