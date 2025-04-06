@@ -272,8 +272,8 @@ class AutoRegressiveModel(torch.nn.Module):
                 )
         llm_checkpoint = checkpoint["model"] if "model" in checkpoint else checkpoint
 
-        print("Check point ", checkpoint)
-        print("LLM check point ", llm_checkpoint)
+        print("Check point ", type(checkpoint))
+        print("LLM check point ", checkpoint["vision_encoder"])
         
         if model_config.vision_encoder is not None:
             # Take the LLM weights (starting with "model.") from the VLM checkpoint
