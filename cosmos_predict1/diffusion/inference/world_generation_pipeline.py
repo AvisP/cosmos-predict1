@@ -136,6 +136,8 @@ class DiffusionText2WorldGenerationPipeline(BaseWorldGenerationPipeline):
             disable_guardrail=disable_guardrail,
         )
         self.prompt_upsampler_dir = prompt_upsampler_dir
+        print("Upsampler dir ", self.prompt_upsampler_dir)
+        
         self.enable_prompt_upsampler = enable_prompt_upsampler
         self.offload_prompt_upsampler = offload_prompt_upsampler
 
